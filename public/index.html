@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node.js Quiz</title>
+  </head>
+  <body>
+    <h1>Node.js Quiz</h1>
+    <div id="quiz-container"></div>
+
+    <script>
+      async function loadQuestions() {
+        const response = await fetch(
+          "http://127.0.0.1:5000/api/quiz/questions"
+        );
+        const questions = await response.json();
+
+        const quizContainer = document.getElementById("quiz-container");
+
+        questions.forEach((question, index) => {
+          const questionElement = document.createElement("div");
+          questionElement.innerHTML = `
+          <p>${index + 1}. ${question.question}</p>
+          <form id="question-${index}">
+            ${question.options
+              .map(
+                (option, i) => `
+              <input type="radio" name="question-${index}" value="${i}">${option}<br>
+            `
+              )
+              .join("")}
+            <p style="color: red; display: none;" id="error-${index}">Please select an option</p>
+            <p style="color: red; display: none;" id="correct-answer-${index}">Correct answer: ${
+            question.options[question.answer]
+          }</p>
+          </form>
+          <br>
+        `;
+          quizContainer.appendChild(questionElement);
+        });
+
+        const submitButton = document.createElement("button");
+        submitButton.textContent = "Submit Answers";
+        submitButton.addEventListener("click", submitAnswers);
+        quizContainer.appendChild(submitButton);
+      }
+
+      async function submitAnswers() {
+        const answers = [];
+
+        const forms = document.querySelectorAll("form");
+        let hasError = false;
+
+        forms.forEach((form, index) => {
+          const selectedOption = form.querySelector("input:checked");
+          const errorElement = document.getElementById(`error-${index}`);
+
+          if (selectedOption) {
+            answers.push(parseInt(selectedOption.value));
+            errorElement.style.display = "none"; 
+          } else {
+            hasError = true;
+            errorElement.style.display = "block"; 
+          }
+        });
+
+        if (hasError) {
+          return;
+        }
+
+        const response = await fetch("http://127.0.0.1:5000/api/quiz", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ answers }),
+        });
+
+        const result = await response.json();
+        displayResult(result, answers);
+      }
+
+      function displayResult(result, userAnswers) {
+        const quizContainer = document.getElementById("quiz-container");
+        const scoreElement = document.createElement("p");
+        scoreElement.textContent = `Your Score: ${result.score}`;
+        quizContainer.appendChild(scoreElement);
+
+        result.feedback.forEach((feedback, index) => {
+          const feedbackElement = document.createElement("p");
+          if (!feedback.correct) {
+            const correctAnswerElement = document.getElementById(
+              `correct-answer-${index}`
+            );
+            correctAnswerElement.style.display = "block";
+          }
+        });
+      }
+
+      loadQuestions();
+    </script>
+  </body>
+</html>

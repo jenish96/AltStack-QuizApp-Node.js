@@ -1,0 +1,102 @@
+[
+      {
+        "question": "What is Node.js?",
+        "options": [
+          "A JavaScript runtime",
+          "A database",
+          "A front-end framework",
+          "An operating system"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "Which of the following is true about Node.js?",
+        "options": [
+            "Node.js is a front-end framework",
+            "Node.js is used for relational database management",
+            "Node.js uses a single-threaded model",
+          "Node.js is not based on JavaScript"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the event loop in Node.js?",
+        "options": [
+            "A loop that iterates through events in a Node.js application",
+            "A mechanism that handles asynchronous callbacks",
+          "A process that handles HTTP requests",
+          "A function that executes JavaScript code"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is a callback function in Node.js?",
+        "options": [
+          "A function passed as an argument to another function, to be executed later",
+          "A function that returns a promise",
+          "A function that handles errors in Node.js",
+          "A function that runs before the main function"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "How does Node.js handle concurrency?",
+        "options": [
+            "Using multi-threading",
+            "Using blocking I/O model",
+            "By not supporting concurrency",
+            "Using event-driven, non-blocking I/O model"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is npm?",
+        "options": [
+            "A module in Node.js for handling HTTP requests",
+            "Node Package Manager, used for managing packages in Node.js",
+          "A programming language similar to JavaScript",
+          "Node's internal module for file system operations"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Which module in Node.js is used to create a web server?",
+        "options": [
+            "fs module",
+            "http module",
+          "url module",
+          "querystring module"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the purpose of the 'require' function in Node.js?",
+        "options": [
+            "To define a new variable",
+            "To create a new function",
+            "To include modules in a Node.js application",
+          "To handle HTTP requests"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Which of the following is a core module in Node.js?",
+        "options": [
+            "express",
+            "mongoose",
+            "axios",
+            "fs"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the role of the package.json file in a Node.js application?",
+        "options": [
+            "To store the source code of the application",
+            "To define metadata about the application and its dependencies",
+          "To configure the web server",
+          "To define the routes of the application"
+        ],
+        "answer": 1                                                                         
+      }
+    ]
